@@ -1,0 +1,245 @@
+/* ==========================================================================
+   Rolpoortfix – stylesheet
+   1. Fonts         5. Header & footer    9.  Offerte op maat
+   2. Tokens        6. Hero               10. Contact & formulier
+   3. Basis         7. Checklist          11. Algemene voorwaarden
+   4. Componenten   8. Diensten           12. Animaties & toegankelijkheid
+   ========================================================================== */
+
+/* 1. Fonts ---------------------------------------------------------------- */
+@font-face{font-family:'Barlow Semi Condensed';font-style:normal;font-weight:600;font-display:swap;src:url(../fonts/barlow-semi-condensed-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Barlow Semi Condensed';font-style:normal;font-weight:700;font-display:swap;src:url(../fonts/barlow-semi-condensed-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Barlow Semi Condensed';font-style:italic;font-weight:700;font-display:swap;src:url(../fonts/barlow-semi-condensed-latin-700-italic.woff2) format('woff2')}
+@font-face{font-family:'Barlow Semi Condensed';font-style:italic;font-weight:800;font-display:swap;src:url(../fonts/barlow-semi-condensed-latin-800-italic.woff2) format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/barlow-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:500;font-display:swap;src:url(../fonts/barlow-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:600;font-display:swap;src:url(../fonts/barlow-latin-600-normal.woff2) format('woff2')}
+
+/* 2. Tokens --------------------------------------------------------------- */
+:root{
+  --navy:#02172A;
+  --navy-mid:#0B2742;
+  --navy-deep:#010F1C;
+  --navy-line:#1C3B5A;
+  --red:#D9141E;
+  --ink:#0A1626;
+  --text:#2B3A4D;
+  --muted:#45556A;
+  --soft:#C9D4E1;
+  --pale:#DCE3EC;
+  --white:#FFFFFF;
+  --whatsapp:#128C4A;
+
+  --font-body:'Barlow','Segoe UI',Helvetica,sans-serif;
+  --font-display:'Barlow Semi Condensed','Arial Narrow',sans-serif;
+
+  --ease-out:cubic-bezier(.2,.7,.2,1);
+  --ease-in-out:cubic-bezier(.7,0,.2,1);
+
+  --header-h:77px; /* wordt bijgewerkt door main.js */
+}
+
+/* 3. Basis ---------------------------------------------------------------- */
+html{scroll-behavior:smooth;scroll-padding-top:84px;background:var(--navy)}
+body{margin:0;min-height:100vh;font-family:var(--font-body);color:var(--ink);background:var(--white)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #FFB3B7;outline-offset:3px}
+[hidden]{display:none !important}
+
+.container{max-width:1240px;margin:0 auto;padding-left:32px;padding-right:32px;box-sizing:border-box}
+.accent{color:var(--red)}
+
+/* 4. Componenten ---------------------------------------------------------- */
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.icon{flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.icon--check{stroke:var(--red);stroke-width:3}
+.icon--white{stroke:var(--white)}
+.icon--bold{stroke-width:3}
+
+.wordmark{font-family:var(--font-display);font-style:italic;font-weight:800;font-size:26px;letter-spacing:.01em;color:var(--white)}
+
+.display-title{margin:0;font-family:var(--font-display);font-style:italic;font-weight:800;line-height:1}
+
+.skew-bar{height:6px;width:100%;max-width:560px;background:var(--red);transform:skewX(-24deg);transform-origin:left}
+
+.tagline{font-family:var(--font-display);font-weight:700}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:6px;text-decoration:none;box-sizing:border-box;cursor:pointer;transition:transform .15s ease,background-color .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn--red{background:var(--red);color:var(--white);border:0}
+.btn--outline{border:2px solid var(--white);color:var(--white)}
+.btn--sm{min-height:44px;padding:0 18px;font-weight:600;font-size:16px}
+.btn--lg{min-height:54px;padding:0 24px;font-weight:600;font-size:17px}
+.btn--display{font-family:var(--font-display);font-style:italic;font-weight:800;font-size:22px}
+
+.icon-ring{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;border:3px solid var(--red);color:var(--navy);flex:none}
+.icon-dot{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:var(--red);flex:none}
+
+.text-link{align-self:flex-start;margin-top:6px;color:var(--navy);font-weight:600;font-size:17px;text-decoration-color:var(--red);text-decoration-thickness:3px;text-underline-offset:6px}
+
+.whatsapp-float{position:fixed;right:20px;bottom:20px;z-index:30;min-height:56px;padding:0 22px 0 18px;border-radius:28px;background:var(--whatsapp);color:var(--white);font-weight:600;font-size:16px;box-shadow:0 6px 18px rgba(1,15,28,.35)}
+
+/* 5. Header & footer ------------------------------------------------------ */
+.site-header{background:var(--navy);position:sticky;top:0;z-index:20;border-bottom:1px solid #12304D}
+.site-header__inner{padding-top:14px;padding-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand__logo{height:48px;width:auto;display:block}
+.main-nav{display:flex;align-items:center;gap:32px;font-weight:500;font-size:16px}
+.main-nav a{text-decoration:none;color:var(--pale)}
+
+.site-footer{background:var(--navy-deep);color:var(--soft)}
+.site-footer__inner{padding-top:48px;padding-bottom:40px;display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:flex-start}
+.site-footer__inner--compact{padding-top:40px;gap:20px 32px;align-items:center}
+.site-footer__brand{display:flex;flex-direction:column;gap:10px}
+.site-footer__brand .wordmark{font-size:28px;letter-spacing:0}
+.site-footer__text{margin:0;font-size:15px;line-height:1.6}
+.footer-nav{display:flex;flex-wrap:wrap;gap:12px 28px;font-size:15px;font-weight:500}
+.footer-nav a{color:var(--soft)}
+.footer-nav a.is-light{color:var(--white)}
+.site-footer__bottom{padding-top:18px;padding-bottom:28px;border-top:1px solid var(--navy-line);letter-spacing:.22em;font-size:14px;color:#8FA1B6}
+
+/* 6. Hero ----------------------------------------------------------------- */
+.hero{position:relative;overflow:hidden;background:var(--navy);color:var(--white);min-height:calc(100vh - var(--header-h));min-height:calc(100svh - var(--header-h));display:flex;flex-direction:column;justify-content:center}
+.hero__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;transform-origin:60% 50%;animation:kenburns 22s ease-out both}
+.hero__shade{position:absolute;inset:0;background:linear-gradient(100deg,rgba(2,23,42,.97) 0%,rgba(2,23,42,.9) 38%,rgba(2,23,42,.55) 70%,rgba(2,23,42,.35) 100%),linear-gradient(to top,rgba(2,23,42,.85) 0%,transparent 35%)}
+.hero__inner{position:relative;width:100%;padding-top:72px;padding-bottom:104px;display:flex;flex-wrap:wrap;gap:56px;align-items:center}
+.hero__content{flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:28px}
+.hero__title{margin:0;font-size:clamp(52px,7.4vw,116px);line-height:.86;letter-spacing:-.01em;animation:fade-up .8s var(--ease-out) .1s both}
+.hero__bar{animation:bar-grow 1s var(--ease-in-out) .45s both}
+.hero__tagline{margin:0;font-size:22px;letter-spacing:.18em;animation:fade-up .8s var(--ease-out) .6s both}
+.hero__lead{margin:8px 0 0;font-weight:500;font-size:21px;line-height:1.5;color:var(--pale);max-width:34em;animation:fade-up .8s var(--ease-out) .8s both}
+.hero__actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px;animation:fade-up .8s var(--ease-out) 1s both}
+.hero__cta{position:relative;overflow:hidden;min-height:54px;padding:0 28px}
+.hero__cta::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-24deg);animation:shine 4.5s ease-in-out 2.2s infinite}
+.hero__whatsapp{background:rgba(2,23,42,.35);backdrop-filter:blur(4px)}
+
+.hero__photos{position:relative;flex:1 1 440px;min-width:0;height:min(64vh,600px);min-height:440px}
+.hero__grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:8px;clip-path:polygon(22% 0,100% 0,100% 100%,0 100%);filter:drop-shadow(0 24px 48px rgba(1,15,28,.55))}
+.hero__photo{overflow:hidden;animation:photo-in 1s var(--ease-out) both}
+.hero__photo:nth-child(1){grid-column:1 / span 2;animation-delay:.35s}
+.hero__photo:nth-child(2){animation-delay:.55s}
+.hero__photo:nth-child(3){animation-delay:.75s}
+.hero__photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--ease-out)}
+.hero__photo:hover img{transform:scale(1.06)}
+.hero__slash{position:absolute;top:0;bottom:0;left:0;width:22%;background:linear-gradient(to bottom right,transparent calc(50% - 5px),var(--red) calc(50% - 5px),var(--red) calc(50% + 5px),transparent calc(50% + 5px));animation:slash-in .9s var(--ease-out) .9s both}
+
+.scroll-hint{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--soft);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.2em;animation:fade-in 1s ease 1.6s both}
+.scroll-hint__mouse{display:block;width:26px;height:42px;border:2px solid rgba(255,255,255,.6);border-radius:14px;position:relative}
+.scroll-hint__mouse::after{content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--red);animation:wheel 1.8s ease-in-out infinite}
+
+/* 7. Checklist ------------------------------------------------------------ */
+.checklist{background:var(--navy-mid);color:var(--white)}
+.checklist__inner{padding-top:26px;padding-bottom:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px 32px}
+.checklist__item{margin:0;display:flex;align-items:center;gap:12px;font-weight:600;font-size:17px}
+.checklist__item:nth-child(2){transition-delay:.1s}
+.checklist__item:nth-child(3){transition-delay:.2s}
+.checklist__item:nth-child(4){transition-delay:.3s}
+
+/* 8. Diensten ------------------------------------------------------------- */
+.services{background:var(--white)}
+.services__intro{padding-top:104px;padding-bottom:40px}
+.services__title{font-size:clamp(38px,5vw,60px);color:var(--navy);max-width:16em}
+.services__lead{margin:20px 0 0;font-size:19px;line-height:1.6;color:var(--muted);max-width:38em}
+
+.service{padding-top:48px;padding-bottom:48px;display:flex;flex-wrap:wrap;gap:56px;align-items:center}
+.service--reverse{flex-direction:row-reverse}
+.service--last{padding-bottom:112px}
+.service__media{position:relative;flex:1 1 460px;min-width:0}
+.service__media img{width:100%;height:420px;object-fit:cover;display:block;clip-path:polygon(0 0,100% 0,88% 100%,0 100%)}
+.service--reverse .service__media img{clip-path:polygon(12% 0,100% 0,100% 100%,0 100%)}
+.service__body{flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:20px;transition-delay:.2s}
+.service__heading{display:flex;align-items:center;gap:14px}
+.service__title{font-size:clamp(30px,7.5vw,40px);color:var(--navy);min-width:0;overflow-wrap:anywhere}
+.service__subtitle{margin:0;font-size:20px;font-weight:600;line-height:1.35;color:var(--navy)}
+.service__text{margin:0;font-size:18px;line-height:1.65;color:var(--muted);max-width:34em}
+.service__list{margin:4px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 24px;font-size:17px;color:var(--ink)}
+.service__list li{display:flex;gap:10px;align-items:baseline}
+.service__list li::before{content:"/";content:"/" / "";color:var(--red);font-weight:800}
+
+/* 9. Offerte op maat ------------------------------------------------------ */
+.quote{position:relative;overflow:hidden;color:var(--white);background:linear-gradient(100deg,rgba(217,20,30,.97) 0%,rgba(217,20,30,.93) 55%,rgba(185,14,23,.86) 100%),url(../img/woning-garagepoort.jpg) center 70% / cover no-repeat var(--red)}
+.quote__inner{padding-top:96px;padding-bottom:96px;display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start}
+.quote__intro{flex:1 1 420px;min-width:0}
+.quote__title{font-size:clamp(56px,8vw,104px);line-height:.88}
+.quote__lead{margin:24px 0 0;font-size:19px;line-height:1.6;max-width:26em}
+
+.steps{flex:1 1 520px;min-width:0;margin:0;padding:0;list-style:none;display:flex;flex-direction:column}
+.step{display:flex;gap:24px;align-items:flex-start;padding:24px 0;border-top:2px solid rgba(255,255,255,.45)}
+.step:last-child{border-bottom:2px solid rgba(255,255,255,.45)}
+.step:nth-child(1){transition-delay:.15s}
+.step:nth-child(2){transition-delay:.3s}
+.step:nth-child(3){transition-delay:.45s}
+.step__num{font-family:var(--font-display);font-style:italic;font-weight:800;font-size:44px;line-height:1;color:var(--navy);width:48px;flex:none}
+.step__title{margin:0;font-weight:600;font-size:21px}
+.step__text{margin:6px 0 0;font-size:17px;line-height:1.55}
+
+/* 10. Contact & formulier ------------------------------------------------- */
+.contact{background:var(--navy);color:var(--white)}
+.contact__inner{padding-top:104px;padding-bottom:104px;display:flex;flex-wrap:wrap;gap:64px;align-items:flex-start}
+.contact__info{flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:28px}
+.contact__title{font-size:clamp(40px,5vw,60px)}
+.contact__lead{margin:0;font-size:18px;line-height:1.6;color:var(--soft);max-width:26em}
+.contact-list{display:flex;flex-direction:column;gap:4px}
+.contact-item{display:flex;align-items:center;gap:16px;padding:14px 0;text-decoration:none;color:var(--white);border-bottom:1px solid var(--navy-line)}
+.contact-item:last-child{border-bottom:0}
+.contact-item__label{font-size:18px;font-weight:600;overflow-wrap:anywhere}
+.contact-item__label--phone{font-family:var(--font-display);font-weight:700;font-size:30px;letter-spacing:.01em}
+
+.form-card{flex:1 1 520px;min-width:0;background:var(--white);color:var(--ink);border-radius:10px;padding:40px;box-sizing:border-box;transition-delay:.15s}
+.quote-form{display:flex;flex-direction:column;gap:20px}
+.form-card__title{font-size:32px;line-height:1.05;color:var(--navy)}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-weight:600;font-size:15px}
+.input{width:100%;box-sizing:border-box;font:inherit;font-size:16px;padding:14px 16px;border:1.5px solid #C5CFDB;border-radius:6px;background:var(--white);color:var(--ink)}
+.input:focus{border-color:var(--navy)}
+textarea.input{resize:vertical}
+.btn--submit{min-height:56px}
+.form-note{margin:0;font-size:14px;line-height:1.5;color:#5A6A7E}
+
+.form-success{display:flex;flex-direction:column;gap:16px;padding:24px 0}
+.form-success__icon{display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:var(--red)}
+.form-success__text{margin:0;font-size:18px;line-height:1.6;color:var(--muted)}
+.btn-secondary{align-self:flex-start;min-height:44px;padding:0 18px;border:2px solid var(--navy);border-radius:6px;background:var(--white);color:var(--navy);cursor:pointer;font:inherit;font-weight:600}
+
+/* 11. Algemene voorwaarden ------------------------------------------------ */
+.page-hero{background:var(--navy);color:var(--white)}
+.page-hero__inner{padding-top:64px;padding-bottom:72px}
+.page-hero__title{font-size:clamp(44px,6vw,80px);line-height:.95}
+.page-hero__bar{max-width:420px;margin-top:24px}
+.page-hero__meta{margin:24px 0 0;font-size:17px;color:var(--soft)}
+
+.legal{padding-top:72px;padding-bottom:112px;display:flex;flex-wrap:wrap;gap:64px;align-items:flex-start}
+.legal-toc{flex:1 1 240px;min-width:0;display:flex;flex-direction:column;gap:12px;font-size:16px;font-weight:500}
+.legal-toc__title{margin:0 0 4px;font-family:var(--font-display);font-weight:700;font-size:20px;color:var(--navy)}
+.legal-toc a{color:var(--muted)}
+.legal-content{flex:999 1 560px;min-width:0;max-width:46em;display:flex;flex-direction:column;gap:44px;font-size:18px;line-height:1.7;color:var(--text)}
+.legal-content p{margin:0}
+.legal-content h2{margin:0 0 12px;font-size:30px;line-height:1.1;color:var(--navy)}
+.legal-card{display:flex;flex-direction:column;gap:6px;padding:24px 28px;background:#EEF2F7;border-radius:8px;font-size:17px;line-height:1.6}
+.legal-card__name{font-weight:600;color:var(--navy)}
+
+/* 12. Animaties & toegankelijkheid ---------------------------------------- */
+@keyframes kenburns{from{transform:scale(1.15)}to{transform:scale(1)}}
+@keyframes fade-up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes fade-in{from{opacity:0}to{opacity:1}}
+@keyframes bar-grow{from{transform:skewX(-24deg) scaleX(0)}to{transform:skewX(-24deg) scaleX(1)}}
+@keyframes photo-in{from{opacity:0;clip-path:inset(0 0 100% 0);transform:translateY(24px)}to{opacity:1;clip-path:inset(0 0 0 0);transform:none}}
+@keyframes slash-in{from{opacity:0;transform:translateY(-40px)}to{opacity:1;transform:none}}
+@keyframes wheel{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
+@keyframes shine{0%{left:-60%}35%,100%{left:130%}}
+
+/* Scroll-reveal: verbergt alleen inhoud als JavaScript draait (class "js" op <html>) */
+.js .reveal{opacity:0;transform:translateY(40px);transition-property:opacity,transform;transition-duration:.9s;transition-timing-function:var(--ease-out)}
+.js .reveal.is-visible{opacity:1;transform:none}
+.js .reveal-img{clip-path:inset(0 100% 0 0);transition:clip-path 1.2s var(--ease-in-out)}
+.js .is-visible .reveal-img{clip-path:inset(0 0 0 0)}
+
+@media (max-width:820px){
+  .main-nav,.hero__photos{display:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .btn:hover{transform:none}
+  .js .reveal,.js .reveal-img{opacity:1;transform:none;clip-path:none}
+}
