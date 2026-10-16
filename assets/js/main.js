@@ -2,20 +2,45 @@
 (function () {
   'use strict';
 
-  // Offerteformulier
-  // TODO live: koppel aan een formulierdienst (bv. Formspree) of eigen backend via het action-attribuut.
+  // Offerteformulier – verstuurd via Netlify Forms (data-netlify="true" in de HTML).
+  // Zonder JavaScript post het formulier gewoon naar Netlify en toont Netlify zijn eigen bedankpagina.
   var form = document.getElementById('offerte-form');
   var ok = document.getElementById('offerte-ok');
+  var fout = document.getElementById('offerte-fout');
   var reset = document.getElementById('offerte-reset');
-  if (form && ok && reset) {
+  if (form && ok && fout && reset) {
+    var submit = form.querySelector('[type="submit"]');
+    var submitLabel = submit.textContent;
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.reportValidity()) return;
-      form.hidden = true;
-      ok.hidden = false;
-      ok.setAttribute('tabindex', '-1');
-      ok.focus();
+
+      submit.disabled = true;
+      submit.textContent = 'Versturen…';
+      fout.hidden = true;
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          form.hidden = true;
+          ok.hidden = false;
+          ok.setAttribute('tabindex', '-1');
+          ok.focus();
+        })
+        .catch(function () {
+          fout.hidden = false;
+        })
+        .then(function () {
+          submit.disabled = false;
+          submit.textContent = submitLabel;
+        });
     });
+
     reset.addEventListener('click', function () {
       form.reset();
       ok.hidden = true;
@@ -32,6 +57,35 @@
   if (header) {
     setHeaderHeight();
     window.addEventListener('resize', setHeaderHeight);
+  }
+
+  // Mobiel menu
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.getElementById('main-nav');
+  if (header && toggle && nav) {
+    var setMenu = function (open) {
+      header.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Menu sluiten' : 'Menu openen');
+    };
+    var isOpen = function () { return header.classList.contains('is-open'); };
+
+    toggle.addEventListener('click', function () { setMenu(!isOpen()); });
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setMenu(false);
+    });
+    document.addEventListener('click', function (e) {
+      if (isOpen() && !header.contains(e.target)) setMenu(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && isOpen()) {
+        setMenu(false);
+        toggle.focus();
+      }
+    });
+    window.matchMedia('(min-width: 1001px)').addEventListener('change', function (e) {
+      if (e.matches) setMenu(false);
+    });
   }
 
   // Scroll-animaties
