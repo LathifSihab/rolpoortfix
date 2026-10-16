@@ -29,6 +29,7 @@
   --pale:#DCE3EC;
   --white:#FFFFFF;
   --whatsapp:#128C4A;
+  --success:#128C4A;
 
   --font-body:'Barlow','Segoe UI',Helvetica,sans-serif;
   --font-display:'Barlow Semi Condensed','Arial Narrow',sans-serif;
@@ -210,7 +211,7 @@ textarea.input{resize:vertical}
 .form-error a{color:inherit;font-weight:600}
 
 .form-success{display:flex;flex-direction:column;gap:16px;padding:24px 0}
-.form-success__icon{display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:var(--red)}
+.form-success__icon{display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:var(--success)}
 .form-success__text{margin:0;font-size:18px;line-height:1.6;color:var(--muted)}
 .btn-secondary{align-self:flex-start;min-height:44px;padding:0 18px;border:2px solid var(--navy);border-radius:6px;background:var(--white);color:var(--navy);cursor:pointer;font:inherit;font-weight:600}
 
